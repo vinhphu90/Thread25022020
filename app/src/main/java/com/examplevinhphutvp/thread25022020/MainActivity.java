@@ -8,17 +8,24 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    int A,B,C ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // khoi tao ra luong
+        //        Cach 2 : Dong bo thread theo object
+//        A sinh ra 1 so index
+//        B sinh ra 1 so index
+//        C ket qua a +b
+        A=B=C =0 ;
         Thread threadA = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1 ; i <= 20 ; i ++){
-                    Log.d("BBB","A running at position:" + i);
+                for (int i = 1 ; i <= 10 ; i ++){
+                    A = i ;
+                    Log.d("BBB","A :" + i);
                 }
 
             }
@@ -26,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
         Thread threadB = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1 ; i <= 20 ; i ++){
-                    Log.d("BBB","B running at position:" + i);
+
+                for (int i = 1 ; i <= 10 ; i ++){
+                    B = i;
+                    Log.d("BBB","B :" + i);
                 }
 
             }
@@ -35,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
         Thread threadC = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1 ; i <= 20 ; i ++){
-                    Log.d("BBB","C running at position:" + i);
+                for (int i = 1 ; i <= 10 ; i ++){
+                    C = A + B;
+                    Log.d("BBB","C :" + i);
                 }
 
             }
@@ -44,11 +54,5 @@ public class MainActivity extends AppCompatActivity {
         threadA.start();
         threadB.start();
         threadC.start();
-    }
-    // cach 1 : dong bo thread theo ham
-    public void printFor(String name){
-        for (int i = 1 ; i <= 1000 ; i++){
-            Log.d("BBB",name + "running at position:"+ i);
-        }
     }
 }
