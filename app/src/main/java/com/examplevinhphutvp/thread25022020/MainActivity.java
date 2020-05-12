@@ -14,27 +14,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // khoi tao ra luong
-        final Thread thread = new Thread(new Runnable() {
+        Thread threadA = new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("BBB","Hello main");
+                for (int i = 1 ; i <= 20 ; i ++){
+                    Log.d("BBB","A running at position:" + i);
+                }
+
             }
         });
-        thread.start();
-        CountDownTimer countDownTimer = new CountDownTimer(1000,1000) {
+        Thread threadB = new Thread(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void run() {
+                for (int i = 1 ; i <= 20 ; i ++){
+                    Log.d("BBB","B running at position:" + i);
+                }
 
             }
-
+        });
+        Thread threadC = new Thread(new Runnable() {
             @Override
-            public void onFinish() {
-                Log.d("BBB",thread.getState().name());
+            public void run() {
+                for (int i = 1 ; i <= 20 ; i ++){
+                    Log.d("BBB","C running at position:" + i);
+                }
 
             }
-        };
-        countDownTimer.start();
-
-
+        });
+        threadA.start();
+        threadB.start();
+        threadC.start();
+    }
+    // cach 1 : dong bo thread theo ham
+    public void printFor(String name){
+        for (int i = 1 ; i <= 1000 ; i++){
+            Log.d("BBB",name + "running at position:"+ i);
+        }
     }
 }
